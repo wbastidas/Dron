@@ -1,0 +1,6 @@
+build/
+__pycache__/
+*.pyc
+*.waypoints
+!herramientas/mapeo/ejemplos/*.waypoints
+mision.geojson

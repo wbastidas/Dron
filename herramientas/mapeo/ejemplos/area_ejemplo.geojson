@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "nombre": "Área de ejemplo (reemplace por la suya en geojson.io)" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-78.5800, -0.5200],
+          [-78.5660, -0.5185],
+          [-78.5645, -0.5290],
+          [-78.5790, -0.5305],
+          [-78.5800, -0.5200]
+        ]]
+      }
+    }
+  ]
+}
