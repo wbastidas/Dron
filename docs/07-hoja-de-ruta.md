@@ -63,7 +63,8 @@ En campo abierto, sin personas cerca, sin viento fuerte, idealmente con un instr
 ## Fase 6 · Visión y evasión (6–10 semanas)
 - [ ] Grabar video con la cámara de amenazas (primero en tierra, sobre un trípode) de **pelotas de espuma** lanzadas
 - [ ] Etiquetar el dataset y entrenar YOLO; compilarlo para Hailo ([10](10-ia-y-evasion.md))
-- [ ] Programar `vision` (detector + rastreador) y `puente_mavlink` (MAVSDK)
+- [x] Rastreador, conversión píxel→NED y supervisor de la maniobra (`companion/`, probados con enlace simulado)
+- [ ] Programar `vision` (captura + inferencia en Hailo) y `puente_mavlink` (MAVSDK)
 - [ ] Probar todo contra ArduPilot SITL inyectando detecciones simuladas
 - [ ] Prueba real: hover a 15 m sobre campo abierto, pelotas de espuma lanzadas desde lejos. **Nunca piedras reales**
 

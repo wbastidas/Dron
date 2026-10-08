@@ -12,6 +12,8 @@ endif()
 add_library(evasion
   src/amenaza.cpp
   src/planificador.cpp
+  src/percepcion.cpp
+  src/supervisor.cpp
   src/simulacion.cpp
 )
 target_include_directories(evasion PUBLIC include)
@@ -25,3 +27,8 @@ add_executable(pruebas_evasion pruebas/pruebas_evasion.cpp)
 target_link_libraries(pruebas_evasion PRIVATE evasion)
 target_compile_options(pruebas_evasion PRIVATE -Wall -Wextra)
 add_test(NAME pruebas_evasion COMMAND pruebas_evasion)
+
+add_executable(pruebas_vision pruebas/pruebas_vision.cpp)
+target_link_libraries(pruebas_vision PRIVATE evasion)
+target_compile_options(pruebas_vision PRIVATE -Wall -Wextra)
+add_test(NAME pruebas_vision COMMAND pruebas_vision)

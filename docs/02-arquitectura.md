@@ -49,9 +49,10 @@ Procesos independientes, para que un fallo en uno no afecte a los demás:
 
 | Proceso | Lenguaje | Función | Estado |
 |---|---|---|---|
-| `evasion` | C++ | Estima la trayectoria de objetos que se acercan y decide la maniobra | **Núcleo hecho** (`companion/`) |
-| `vision` | C++ + HailoRT | Detecta y rastrea objetos en la cámara de amenazas (YOLO) | Fase 6 |
-| `puente_mavlink` | C++ (MAVSDK) | Envía las maniobras a ArduPilot en modo GUIDED y devuelve el control | Fase 6 |
+| `evasion` | C++ | Estima la trayectoria de objetos que se acercan y decide la maniobra | **Hecho** (`companion/`) |
+| `percepcion` + `supervisor` | C++ | Convierte detecciones en píxeles en amenazas NED, rastrea y decide cuándo tomar y soltar el control | **Hecho** (`companion/`), probado con enlace simulado |
+| `vision` | C++ + HailoRT | Captura de cámara e inferencia YOLO; entrega `Deteccion` a `percepcion` | Fase 6 |
+| `puente_mavlink` | C++ (MAVSDK) | Implementa `EnlaceVuelo`: modo, velocidad y actitud de ArduPilot | Fase 6 |
 | `captura` | Python | Toma la foto de mapeo cuando ArduPilot lo ordena y guarda posición/actitud | Fase 5 |
 | `registro` | Python | Guarda todo para analizar los vuelos | Fase 5 |
 

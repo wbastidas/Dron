@@ -61,10 +61,18 @@ Modelo pequeño (`n`): en el Hailo-8L corre a decenas de fps.
 ### 3. Compilar para Hailo
 El modelo se exporta a ONNX y se compila al formato `.hef` con el *Hailo Dataflow Compiler* (necesita una PC con Linux x86). Raspberry Pi y Hailo publican ejemplos de YOLO listos (`hailo-rpi5-examples`).
 
-### 4. Detección por movimiento (complemento)
+### 4. Qué ya está resuelto en `companion/`
+Entre la salida del detector y ArduPilot ya existe código probado:
+- **Geometría** (`geometria.hpp`): pasa cada detección a una dirección NED usando la actitud del avión. Así el giro del avión no se confunde con movimiento del objeto.
+- **Percepción** (`percepcion.cpp`): asocia detecciones entre fotogramas, exige 3 seguidas para confirmar una pista (una falsa alarma de un fotograma se ignora) y entrega la amenaza más urgente.
+- **Supervisor** (`supervisor.cpp`): solo actúa en QLOITER/QHOVER, cede el control si el piloto cambia de modo y devuelve el modo anterior al terminar o a los 6 s.
+
+La prueba de cadena completa (piedra de 8 cm → píxeles con ruido de 0.3 px → percepción → supervisor → dron simulado con 0.15 s de latencia) esquiva 24 de 24 lanzamientos. **Con 0.6 s de latencia esquiva solo la mitad**: la latencia total (cámara + inferencia + MAVLink + respuesta del dron) es el número que hay que medir en el avión real. Esa prueba asume un detector perfecto que ve la piedra desde el lanzamiento; el detector real es la parte que falta validar.
+
+### 5. Detección por movimiento (complemento)
 A más de 15 m, una piedra ocupa tan pocos píxeles que la red neuronal no la reconoce. Se agrega un detector clásico: diferencia entre fotogramas compensada por el movimiento del dron, que encuentra objetos pequeños **que se mueven distinto del fondo**. Es más rápido que la red y detecta antes; la red confirma y reduce las falsas alarmas.
 
-### 5. Integración y pruebas
+### 6. Integración y pruebas
 1. En SITL: inyectar detecciones simuladas y verificar que `puente_mavlink` cambia a GUIDED, envía la velocidad y vuelve al modo anterior.
 2. En vuelo: hover a 15 m sobre campo abierto, pelotas de espuma lanzadas desde lejos por una persona protegida. **Nunca con piedras reales ni con personas debajo del dron.**
 
