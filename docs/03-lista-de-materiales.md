@@ -57,7 +57,7 @@ La compra se divide en **dos etapas**. La etapa 1 permite aprender a volar y hac
 
 Si el presupuesto se ajusta, lo primero que puede esperar es la etapa 2 completa: el avión ya mapea solo con una cámara que dispare por intervalo de tiempo.
 
-> **Requisito de 1 hora de vuelo:** el T2 Cruza llega apenas. Antes de comprar el avión, lee [11 · Autonomía](11-autonomia-1-hora.md) y decide entre las opciones A–D.
+> **Requisito de 1 hora de vuelo (criterio estricto: 60 min de crucero + 20 % de reserva, tope USD 2 000):** el T2 Cruza no lo garantiza y en la sierra es improbable. **No compres el avión todavía**: lee [11 · Autonomía](11-autonomia-1-hora.md) y consigue primero datos reales de vuelo del avión candidato. Lo que sí puedes comprar ya: radio, módulo, receptor, cargador y herramientas.
 
 ## Estimación de peso (a verificar con balanza)
 

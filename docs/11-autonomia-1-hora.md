@@ -74,6 +74,27 @@ Supuestos por defecto: 16 m/s, rendimiento motor+hélice 0.55, 180 W/kg en hover
 | **C. Subir el presupuesto a un ala de 1.8–2.2 m** | Más batería, más margen en altura. Precios de referencia encontrados: Foxtech Loong 2160 a USD 2 899 (otro avión), un MFE HERO 2180 mm a £1 399 (agotado). El Nimbus no tiene precio publicado | El 1 h es obligatorio para la operación o vas a operar sobre 2 500 m |
 | **D. Relajar el requisito** | "1 hora" como tiempo total en el aire sin reserva, o dos vuelos de 35–40 min con cambio de batería | El trabajo real permite aterrizar y cambiar de batería |
 
+## Decisión registrada
+
+- **Criterio:** estricto, 60 min de crucero con 20 % de reserva.
+- **Presupuesto:** se mantiene en USD 2 000 (opciones A, B o D de la tabla).
+
+**Consecuencia: con ese criterio y ese presupuesto, 1 hora no está garantizada, y en la sierra es improbable.** El único candidato que encontré en ese rango, además del T2 Cruza, es el ArgusFPV ROC Wing VTOL (1.2 m, anuncia "hasta 80 min" con una 6S 6000 mAh LiPo, 133 Wh). Comprobación con el modelo (masa total supuesta de 2.2 kg, LiPo de 150 Wh/kg, nivel del mar):
+
+| Finura | Velocidad | Criterio estricto (con reserva) | Sin reserva ni margen de batería |
+|---|---|---|---|
+| 6 | 13 m/s | 48 min | 74 min |
+| 7 | 13 m/s | 54 min | 85 min |
+| 8 | 13 m/s | **61 min** | 95 min |
+| 8 | 16 m/s | 51 min | 79 min |
+
+El "hasta 80 min" del anuncio es coherente con L/D 7–8 volando lento y **sin reserva**: no contradice el modelo, pero tampoco cumple tu criterio. Solo lo cumpliría con L/D ≥ 8 a 13 m/s a nivel del mar; a 2 900 m, ni así. (La masa de 2.2 kg es un supuesto mío: la ficha que encontré no la da.)
+
+**Qué hacer antes de comprar el avión (no comprarlo todavía):**
+1. Pedir al vendedor o a dueños del avión un **registro de vuelo de ArduPilot** (`.bin`) con la corriente en crucero (`BAT.Curr`), la velocidad y el peso. Con eso se calcula la finura real y se reemplazan los supuestos.
+2. Definir la **altitud de la zona de trabajo**. En la costa o el oriente (cerca del nivel del mar) el criterio estricto es mucho más alcanzable que en la sierra.
+3. Si el avión real no llega: o se sube el presupuesto (opción C), o se acepta la opción D (dos vuelos con cambio de batería).
+
 ## Qué hay que medir en la fase 3 (decide todo)
 1. Corriente en crucero a 14, 16 y 18 m/s (el registro de ArduPilot guarda `BAT.Curr`). Con eso se calcula la finura real: `L/D = m·g·v / (η·P)`.
 2. Energía consumida en un despegue + aterrizaje vertical.

@@ -8,7 +8,7 @@ Cada fase tiene un **criterio de salida**: no pases a la siguiente hasta cumplir
 - [x] Núcleo de evasión de amenazas con simulador (`companion/`)
 - [ ] **Comprar solo la radio TX16S** y practicar en un simulador de aeromodelismo (PicaSim es gratuito; RealFlight es de pago y más realista). Meta: 10 horas de vuelo simulado en ala fija y en hover.
 - [ ] Instalar WSL2 + ArduPilot SITL en Windows y volar el QuadPlane simulado ([08](08-simulacion-sitl.md))
-- [ ] Decidir la opción A/B/C/D para el requisito de 1 hora ([11](11-autonomia-1-hora.md)) **antes de comprar el avión**
+- [ ] Conseguir un registro de vuelo (`.bin`) real del avión candidato y la altitud de la zona de trabajo; decidir la opción A/B/C/D de [11](11-autonomia-1-hora.md) **antes de comprar el avión** (criterio estricto de 60 min con reserva, tope USD 2 000)
 - [ ] Cargar en SITL una misión generada con `mapeo` y verla completa
 - [ ] Practicar soldadura en una placa de prueba (20 uniones limpias de pads y cables 14–22 AWG)
 - [ ] Contactar a la DGAC para el registro, el seguro y la consulta BVLOS ([05](05-normativa-y-seguridad.md))
