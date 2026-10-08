@@ -19,6 +19,8 @@ flowchart LR
 
 ## 2. Planificar la misión
 
+En Windows (PowerShell) usa `py` en lugar de `python3` y pon las coordenadas **entre comillas**: `--despegue "-0.5300,-78.5800"`.
+
 ```bash
 cd herramientas/mapeo
 python3 -m mapeo camaras                     # cámaras disponibles
@@ -53,7 +55,9 @@ Abre `mi_mision.geojson` en geojson.io para ver las líneas sobre el mapa antes 
 | Terreno abierto, construcciones | 75 % / 65 % (por defecto) | |
 | Vegetación densa, bosque | 80 % / 70 % | La vegetación se mueve y tiene poca textura |
 | Con viento > 5 m/s | — | Use `--rumbo` para que las líneas queden **perpendiculares al viento**: la velocidad sobre el suelo es igual en todas las pasadas |
-| Zona montañosa | — | **Siempre `--terreno`**: la altitud se mide sobre el terreno, no sobre el punto de despegue |
+| Zona montañosa | — | **Siempre `--terreno`**: la altitud se mide sobre el terreno, no sobre el punto de despegue. Cada subida del relieve cuesta energía: deja más reserva. Revisa la geocerca de altura (ver [firmware](../firmware/ardupilot/README.md)) |
+| Zona plana | — | `--terreno` sigue siendo seguro y es lo recomendable si hay cualquier desnivel; en terreno realmente plano la altitud relativa al despegue basta |
+| Área para ~1 h de vuelo | — | ≈ 170 ha a 3 cm/píxel. Use `--autonomia <min medidos>` para que el programa avise si no cabe ([11](11-autonomia-1-hora.md)) |
 
 ## 3. Cargar y revisar en Mission Planner
 1. Pestaña **Plan** → *Load WP File* → elige el `.waypoints`.

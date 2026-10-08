@@ -7,7 +7,7 @@ Proyecto para construir, programar y operar un dron de **despegue vertical y vue
 | | |
 |---|---|
 | **Plataforma** | Ala fija VTOL (HEEWING T2 Cruza VTOL, 1.2 m de envergadura) |
-| **Alcance** | Más de 5 km (radio ELRS 900 MHz); 40–60 min de vuelo estimados |
+| **Alcance** | Más de 5 km (radio ELRS 900 MHz). Requisito: ≥ 1 h de vuelo; con el T2 Cruza es el límite superior (31–56 min de crucero según la aerodinámica y la altura), ver [doc 11](docs/11-autonomia-1-hora.md) |
 | **Piloto automático** | ArduPilot (QuadPlane), configurado, no reescrito |
 | **Computadora de a bordo** | Raspberry Pi 5 + acelerador de IA Hailo |
 | **Mapeo** | Cámara nadir 12 MP, ~3 cm/píxel a 116 m; procesamiento en WebODM |
@@ -26,6 +26,7 @@ Proyecto para construir, programar y operar un dron de **despegue vertical y vue
 8. [Simulación con ArduPilot SITL](docs/08-simulacion-sitl.md)
 9. [Mapeo y procesamiento](docs/09-mapeo-y-procesamiento.md)
 10. [IA: no chocar y esquivar objetos lanzados](docs/10-ia-y-evasion.md)
+11. [**Autonomía: ¿se puede volar 1 hora?**](docs/11-autonomia-1-hora.md): modelo de energía, opciones y qué medir
 
 Configuración del piloto automático y lista de verificación previa al vuelo: [firmware/ardupilot](firmware/ardupilot/README.md).
 
@@ -34,8 +35,8 @@ Configuración del piloto automático y lista de verificación previa al vuelo: 
 | Carpeta | Lenguaje | Qué hace | Estado |
 |---|---|---|---|
 | [`herramientas/mapeo`](herramientas/mapeo) | Python (solo biblioteca estándar) | Planifica misiones de fotogrametría para VTOL y las exporta a Mission Planner/QGC | ✅ Funcional, con pruebas |
-| [`companion`](companion) | C++17 | Núcleo de evasión: predice trayectorias de objetos lanzados y planifica la maniobra; simulador | ✅ Núcleo funcional, con pruebas |
-| `companion` (visión, MAVLink) | C++ | Detector YOLO en Hailo, puente MAVSDK con ArduPilot | ⏳ Fase 6 |
+| [`companion`](companion) | C++17 | Evasión de objetos lanzados: trayectoria, percepción (píxel→NED, rastreo), supervisor de modo y simulador | ✅ Funcional, con pruebas (incluye cadena completa simulada) |
+| `companion` (visión, MAVLink) | C++ | Captura + detector YOLO en Hailo; enlace MAVSDK con ArduPilot | ⏳ Fase 6 (requiere hardware) |
 | `captura` | Python | Disparo y geoetiquetado de fotos | ⏳ Fase 5 |
 
 ### Probar rápido
@@ -47,7 +48,7 @@ python3 -m mapeo planificar --area ejemplos/area_ejemplo.geojson --despegue -0.5
 
 # Compilar y probar el núcleo de evasión
 cd ../../companion
-cmake -S . -B build && cmake --build build -j && ./build/pruebas_evasion
+cmake -S . -B build && cmake --build build -j && ctest --test-dir build --output-on-failure
 ./build/simular_piedra 300 12 0.15
 ```
 

@@ -105,4 +105,4 @@ Separadores de nylon M2.5 de 11 mm entre la Pi 5 y el AI HAT+.
 | Raspberry Pi 5 + Hailo + 2 cámaras | 8–12 W |
 | Controladora, GPS, receptor, telémetro | ~3 W |
 
-La electrónica de a bordo consume ~5 % de lo que consume el crucero: le resta unos 2–3 minutos de autonomía.
+La electrónica de a bordo (12 W) es ~8 % de la potencia de crucero: le resta unos 3–4 minutos de autonomía.
