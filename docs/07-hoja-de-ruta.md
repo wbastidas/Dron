@@ -7,7 +7,8 @@ Cada fase tiene un **criterio de salida**: no pases a la siguiente hasta cumplir
 - [x] Planificador de misiones de mapeo (`herramientas/mapeo`)
 - [x] Núcleo de evasión de amenazas con simulador (`companion/`)
 - [ ] **Comprar solo la radio TX16S** y practicar en un simulador de aeromodelismo (PicaSim es gratuito; RealFlight es de pago y más realista). Meta: 10 horas de vuelo simulado en ala fija y en hover.
-- [ ] Instalar ArduPilot SITL y volar el QuadPlane simulado ([08](08-simulacion-sitl.md))
+- [ ] Instalar WSL2 + ArduPilot SITL en Windows y volar el QuadPlane simulado ([08](08-simulacion-sitl.md))
+- [ ] Decidir la opción A/B/C/D para el requisito de 1 hora ([11](11-autonomia-1-hora.md)) **antes de comprar el avión**
 - [ ] Cargar en SITL una misión generada con `mapeo` y verla completa
 - [ ] Practicar soldadura en una placa de prueba (20 uniones limpias de pads y cables 14–22 AWG)
 - [ ] Contactar a la DGAC para el registro, el seguro y la consulta BVLOS ([05](05-normativa-y-seguridad.md))
@@ -37,7 +38,8 @@ En campo abierto, sin personas cerca, sin viento fuerte, idealmente con un instr
 - [ ] Prueba de RTL en hover
 - [ ] Transición a avión a 60+ m y vuelo en **FBWA**; volver a hover (QLOITER) y aterrizar
 - [ ] Misión AUTO corta: despegue VTOL, 4 waypoints en línea de vista, aterrizaje VTOL
-- [ ] **Medir la autonomía real**: consumo (mAh por minuto) en crucero y en hover. Pasar el dato a `mapeo --autonomia`
+- [ ] **Medir la autonomía real** (decide el requisito de 1 h, ver [11](11-autonomia-1-hora.md)): corriente en crucero a 14/16/18 m/s, energía de un despegue+aterrizaje y tiempo hasta el 20 % de batería. Con eso se calcula la finura real y se pasa el dato a `mapeo planificar --autonomia`
+- [ ] **Decisión A/B/C/D** de [11](11-autonomia-1-hora.md) con los números medidos
 - [ ] Revisar los registros (logs) de cada vuelo: vibraciones, consumo, calidad del GPS
 
 **Criterio de salida:** 10 misiones AUTO completas sin intervención manual.

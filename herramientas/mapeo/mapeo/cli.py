@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .camara import CAMARAS
+from .energia import ModeloEnergia, autonomia, bateria_para
 from .mision import ParametrosMapeo, exportar_geojson, exportar_waypoints, planificar
 
 
@@ -43,6 +44,33 @@ def _porcentaje(texto: str) -> float:
 def _cmd_camaras(_args: argparse.Namespace) -> int:
     for clave, cam in CAMARAS.items():
         print(f"{clave:12s} {cam.nombre}  ({cam.ancho_px}x{cam.alto_px}, f={cam.focal_mm} mm)")
+    return 0
+
+
+def _cmd_autonomia(args: argparse.Namespace) -> int:
+    modelo = ModeloEnergia(
+        masa_sin_bateria_kg=args.masa_sin_bateria,
+        velocidad_ms=args.velocidad,
+        finura=args.finura,
+        rendimiento=args.rendimiento,
+        hover_w_por_kg=args.hover_w_kg,
+        reserva=args.reserva,
+        altitud_msnm=args.altitud_msnm,
+    )
+    if args.objetivo is not None:
+        resultado = bateria_para(args.objetivo, modelo, args.masa_maxima)
+        print(f"Para {args.objetivo:.0f} min de crucero con {args.reserva:.0%} de reserva:")
+    else:
+        resultado = autonomia(args.bateria_wh, modelo)
+        print(f"Con una batería de {args.bateria_wh:.0f} Wh:")
+    print(f"  Batería necesaria:   {resultado.bateria_wh:.0f} Wh")
+    print(f"  Masa total:          {resultado.masa_total_kg:.2f} kg")
+    print(f"  Potencia en crucero: {resultado.potencia_crucero_w:.0f} W a {args.velocidad:g} m/s")
+    print(f"  Energía en hover:    {resultado.energia_hover_wh:.1f} Wh")
+    print(f"  Crucero disponible:  {resultado.minutos_crucero:.0f} min")
+    if args.masa_maxima is not None and resultado.masa_total_kg > args.masa_maxima:
+        print(f"ADVERTENCIA: supera la masa máxima de {args.masa_maxima:g} kg", file=sys.stderr)
+    print("Estimación de primer orden: valide la finura y el rendimiento midiendo un vuelo real.")
     return 0
 
 
@@ -112,6 +140,20 @@ def construir_parser() -> argparse.ArgumentParser:
     opciones_altura(gsd)
     gsd.set_defaults(func=_cmd_gsd)
 
+    aut = sub.add_parser("autonomia", help="estima el tiempo de vuelo o la batería necesaria")
+    aut.add_argument("--masa-sin-bateria", type=float, required=True, help="kg: avión + electrónica + cámaras, sin batería")
+    destino = aut.add_mutually_exclusive_group(required=True)
+    destino.add_argument("--bateria-wh", type=float, help="energía nominal de la batería en Wh")
+    destino.add_argument("--objetivo", type=float, help="minutos de crucero deseados (calcula la batería)")
+    aut.add_argument("--velocidad", type=float, default=16.0, help="velocidad de crucero en m/s")
+    aut.add_argument("--finura", type=float, default=6.0, help="L/D en crucero, con los rotores VTOL (def. 6)")
+    aut.add_argument("--rendimiento", type=float, default=0.55, help="motor+variador+hélice (def. 0.55)")
+    aut.add_argument("--hover-w-kg", type=float, default=180.0, help="W por kg en hover (def. 180)")
+    aut.add_argument("--reserva", type=float, default=0.20, help="fracción de energía de reserva (def. 0.20)")
+    aut.add_argument("--altitud-msnm", type=float, default=0.0, help="altitud del área sobre el nivel del mar (def. 0)")
+    aut.add_argument("--masa-maxima", type=float, help="kg máximos de despegue del avión")
+    aut.set_defaults(func=_cmd_autonomia)
+
     plan = sub.add_parser("planificar", help="genera la misión de mapeo")
     opciones_altura(plan)
     plan.add_argument("--area", type=Path, required=True, help="GeoJSON con el polígono a mapear")
@@ -128,12 +170,27 @@ def construir_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _es_numero(texto: str) -> bool:
+    try:
+        float(texto)
+    except ValueError:
+        return False
+    return True
+
+
 def _unir_coordenadas(argv: list[str]) -> list[str]:
-    """argparse confunde "-0.53,-78.58" con una opción; lo une como --despegue=valor."""
+    """argparse confunde "-0.53,-78.58" con una opción; lo une como --despegue=valor.
+
+    PowerShell trata la coma como operador de lista y entrega "-0.53" y "-78.58"
+    como dos argumentos: también se aceptan y se unen.
+    """
     resultado = []
     i = 0
     while i < len(argv):
-        if argv[i] == "--despegue" and i + 1 < len(argv):
+        if argv[i] == "--despegue" and i + 2 < len(argv) and _es_numero(argv[i + 1]) and _es_numero(argv[i + 2]):
+            resultado.append(f"--despegue={argv[i + 1]},{argv[i + 2]}")
+            i += 3
+        elif argv[i] == "--despegue" and i + 1 < len(argv):
             resultado.append(f"--despegue={argv[i + 1]}")
             i += 2
         else:

@@ -8,13 +8,16 @@
 | País | Ecuador | Normativa DGAC, límite de 122 m sobre el terreno, régimen courier 4x4 de SENAE |
 | Presupuesto de hardware | USD 900–2000 | Plataforma comercial PNP + electrónica abierta, sin LiDAR ni RTK al inicio |
 | Distancia piloto–zona | Más de 5 km | **Ala fija VTOL**, no multirrotor. Radio de 900 MHz. Requiere permiso BVLOS |
+| Autonomía | **Al menos 1 hora de vuelo.** Ver [11](11-autonomia-1-hora.md): con el T2 Cruza es el límite superior |
+| Terreno | Mayormente plano, a veces montañoso. Seguimiento del terreno siempre que haya desnivel |
+| Estación en tierra | Windows |
 | Experiencia | Programa en Python/C++; no suelda, no tiene impresora 3D y no ha volado | Avión pre-ensamblado y de fábrica afinado; fase de simulador obligatoria; compra de kit de soldadura |
 | IA | Evitar choques y esquivar piedras lanzadas | Detector de objetos + estimación de trayectoria + maniobra evasiva (C++) |
 
 ## Decisiones clave y por qué
 
 ### 1. VTOL de ala fija en lugar de cuadricóptero
-Un cuadricóptero de este presupuesto vuela 20–30 min y gasta casi toda su energía en mantenerse en el aire; llegar a una zona a 5 km y volver le deja muy poco tiempo para mapear. Un ala fija planea y vuela 45–90 min con la misma batería, pero necesita pista. El **VTOL** (despegue y aterrizaje vertical como un dron, crucero como avión) combina ambas cosas: sale de un sitio pequeño y seguro, y recorre distancias largas.
+Un cuadricóptero de este presupuesto vuela 20–30 min y gasta casi toda su energía en mantenerse en el aire; llegar a una zona a 5 km y volver le deja muy poco tiempo para mapear. Un ala fija gasta mucho menos por minuto de crucero, pero necesita pista. El **VTOL** (despegue y aterrizaje vertical como un dron, crucero como avión) combina ambas cosas: sale de un sitio pequeño y seguro, y recorre distancias largas.
 
 ### 2. No diseñar el fuselaje desde cero (por ahora)
 Diseñar una aeronave desde cero (perfil alar, centro de gravedad, superficies de control, estructura) es un proyecto aeronáutico en sí mismo, y los primeros prototipos suelen terminar estrellados. Como aún no hay experiencia de vuelo, se parte de un **fuselaje VTOL comercial "PNP"** (Plug-N-Play: motores, variadores y servos ya instalados) con soporte en ArduPilot. Nosotros diseñamos todo lo demás: la integración de la electrónica, la cámara, la computadora de a bordo, el software de misión y la IA. Los "planos" del proyecto son, por tanto, planos de **integración y cableado** ([06](06-planos-de-cableado.md)). Más adelante, con experiencia, se puede diseñar un fuselaje propio.
@@ -45,8 +48,8 @@ Física básica: una piedra lanzada a mano sale a 20–30 m/s y alcanza, en el m
 
 | Parámetro | Estimación |
 |---|---|
-| Autonomía | 40–60 min con 6S2P Li-ion (se mide en la fase 3) |
+| Autonomía de crucero | **31–56 min** con 6S2P Li-ion en el T2 Cruza (modelo, depende de L/D y de la altura; ver [11](11-autonomia-1-hora.md)). Se mide en la fase 3 |
 | Velocidad de crucero | 15–18 m/s |
-| Área por vuelo | 80–150 ha a 3 cm/píxel (el planificador avisa si no alcanza la batería) |
+| Área por vuelo | ~170 ha a 3 cm/píxel por cada hora de vuelo; ~110 ha si la autonomía real es de 40 min |
 | Alcance de radio | 10–30 km en línea de vista con ELRS 900 MHz; en montaña, lo limita el relieve |
 | GSD típico | 2.5–3.5 cm/píxel a 100–120 m con Pi HQ Camera + lente de 6 mm |

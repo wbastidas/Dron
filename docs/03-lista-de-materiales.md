@@ -16,7 +16,7 @@ La compra se divide en **dos etapas**. La etapa 1 permite aprender a volar y hac
 | 4 | Avión VTOL | **HEEWING T2 Cruza VTOL PNP** (con controladora de fábrica) | 650–780 | AliExpress (HEEWING Official), tiendas FPV | Envergadura 1200 mm, batería 6S. Confirma con el vendedor si incluye GPS y sensor de velocidad. **Supera USD 400**: ver aduanas |
 | 5 | GPS + brújula | Matek **M10Q-5883** (u-blox M10) | 35–45 | AliExpress, Amazon | Solo si el kit no lo incluye |
 | 6 | Sensor de velocidad aerodinámica | Matek **ASPD-4525** + tubo pitot | 35–45 | AliExpress | Muy recomendado en ala fija: evita entradas en pérdida con viento |
-| 7 | Baterías (×2) | **6S2P Li-ion 21700** (celdas Molicel P45B, ~9 000 mAh) o LiPo 6S 5 000 mAh para empezar | 100–140 c/u | **Comprar en Ecuador** de preferencia | Los couriers restringen el envío de baterías de litio |
+| 7 | Baterías (×2) | **6S2P Li-ion 21700** (celdas Molicel P45B, ~9 000 mAh, 194 Wh) o LiPo 6S 5 000 mAh para empezar. **Para acercarse a 1 h: 6S3P (≈290 Wh, ~1.3 kg)** si el peso lo permite | 100–140 c/u (6S2P) | **Comprar en Ecuador** de preferencia | Los couriers restringen el envío de baterías de litio. Ver [11](11-autonomia-1-hora.md) |
 | 8 | Cargador | ToolkitRC M7AC o ISDT 608AC (con fuente incluida) | 60–80 | AliExpress, Amazon | Que cargue 6S y balancee |
 | 9 | Herramientas de soldadura | Cautín **Pinecil V2** + estaño 63/37 con flux + flux en pasta + termorretráctil | 50–60 | AliExpress, Amazon | Practica en una placa de prueba antes de tocar el avión |
 | 10 | Seguridad y montaje | Multímetro, bolsa ignífuga para baterías, conectores XT60/XT90, velcro, bridas, llaves Allen | 50–70 | Ferretería local, Amazon | |
@@ -57,6 +57,8 @@ La compra se divide en **dos etapas**. La etapa 1 permite aprender a volar y hac
 
 Si el presupuesto se ajusta, lo primero que puede esperar es la etapa 2 completa: el avión ya mapea solo con una cámara que dispare por intervalo de tiempo.
 
+> **Requisito de 1 hora de vuelo:** el T2 Cruza llega apenas. Antes de comprar el avión, lee [11 · Autonomía](11-autonomia-1-hora.md) y decide entre las opciones A–D.
+
 ## Estimación de peso (a verificar con balanza)
 
 | Elemento | Peso aprox. |
@@ -68,4 +70,4 @@ Si el presupuesto se ajusta, lo primero que puede esperar es la etapa 2 completa
 | BEC, telémetro, cables, soportes | ~120 g |
 | **Total** | **≈ 2 800–3 100 g** (máximo del fabricante: 3 500 g) |
 
-Si te pasas del peso, usa una batería más pequeña: pierdes autonomía, pero el avión vuela seguro. Cualquier componente nuevo obliga a **revisar el centro de gravedad** (CG) antes de volar.
+Con la 6S3P (~1.3 kg) el total sube a ≈3.4 kg, pegado al máximo de 3.5 kg: pésalo todo antes. Si te pasas del peso, usa una batería más pequeña: pierdes autonomía, pero el avión vuela seguro. Cualquier componente nuevo obliga a **revisar el centro de gravedad** (CG) antes de volar.

@@ -7,7 +7,7 @@ Proyecto para construir, programar y operar un dron de **despegue vertical y vue
 | | |
 |---|---|
 | **Plataforma** | Ala fija VTOL (HEEWING T2 Cruza VTOL, 1.2 m de envergadura) |
-| **Alcance** | Más de 5 km (radio ELRS 900 MHz); 40–60 min de vuelo estimados |
+| **Alcance** | Más de 5 km (radio ELRS 900 MHz). Requisito: ≥ 1 h de vuelo; con el T2 Cruza es el límite superior (31–56 min de crucero según la aerodinámica y la altura), ver [doc 11](docs/11-autonomia-1-hora.md) |
 | **Piloto automático** | ArduPilot (QuadPlane), configurado, no reescrito |
 | **Computadora de a bordo** | Raspberry Pi 5 + acelerador de IA Hailo |
 | **Mapeo** | Cámara nadir 12 MP, ~3 cm/píxel a 116 m; procesamiento en WebODM |
@@ -26,6 +26,7 @@ Proyecto para construir, programar y operar un dron de **despegue vertical y vue
 8. [Simulación con ArduPilot SITL](docs/08-simulacion-sitl.md)
 9. [Mapeo y procesamiento](docs/09-mapeo-y-procesamiento.md)
 10. [IA: no chocar y esquivar objetos lanzados](docs/10-ia-y-evasion.md)
+11. [**Autonomía: ¿se puede volar 1 hora?**](docs/11-autonomia-1-hora.md): modelo de energía, opciones y qué medir
 
 Configuración del piloto automático y lista de verificación previa al vuelo: [firmware/ardupilot](firmware/ardupilot/README.md).
 
